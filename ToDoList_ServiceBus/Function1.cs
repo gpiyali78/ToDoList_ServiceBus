@@ -16,13 +16,13 @@ namespace ToDoList_ServiceBus
             _fetchRepo = fetchRepo;
         }
         [FunctionName("Function1")]
-        public void Run([ServiceBusTrigger("todolist-queue",Connection = "AzurServiceBusConnectionString")]string myQueueItem, ILogger log)
+        public void Run([ServiceBusTrigger("todolist-queue",Connection = "AzurServiceBusConnectionString")] TaskList input, ILogger log)
         {
             try
             {
-                log.LogInformation($"C# Service Bus queue trigger function processed message: {myQueueItem}");
-                var reqBody = new StreamReader(myQueueItem).ReadToEnd();
-                var input = JsonConvert.DeserializeObject<TaskList>(reqBody);
+                log.LogInformation($"C# Service Bus queue trigger function processed message: {input}");
+               // var reqBody = new StreamReader(myQueueItem).ReadToEnd();
+               // var input = JsonConvert.DeserializeObject<TaskList>(reqBody);
                 var task = new TaskList
                 {
                     //TaskId=input.TaskId,
